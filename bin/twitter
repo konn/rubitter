@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby -Ku
+require 'twitter'
+require 'optparse'
+require 'readline'
+
+OPTS = {}
+opt = OptionParser.new
+opt.on("-u", "--user"){|v| OPTS[:user] = v}
+opt.on("-p", "--pass"){|v| OPTS[:pass] = v}
+opt.parse!(ARGV)
+
+tw = Twitter.new(OPTS[:user], OPTS[:pass])
+while (print "twitter> "; $_ = Readline.readline)
+  tw.update($_)
+end
